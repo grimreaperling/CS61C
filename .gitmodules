@@ -1,0 +1,12 @@
+[submodule "su20-proj1-starter"]
+	path = su20-proj1-starter
+	url = https://github.com/61c-teach/su20-proj1-starter.git
+[submodule "su20-proj2-starter"]
+	path = su20-proj2-starter
+	url = https://github.com/61c-teach/su20-proj2-starter.git
+[submodule "su20-proj3-starter"]
+	path = su20-proj3-starter
+	url = https://github.com/61c-teach/su20-proj3-starter.git
+[submodule "su20-proj4-starter"]
+	path = su20-proj4-starter
+	url = https://github.com/61c-teach/su20-proj4-starter.git
