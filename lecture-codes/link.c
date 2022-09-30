@@ -103,8 +103,3 @@ void printNode(node *list) {
     }
     printf("%s\n", iterator->value);
 }
-    
-
-    
-
-
