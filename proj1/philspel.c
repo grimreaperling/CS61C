@@ -48,12 +48,12 @@ int main(int argc, char **argv) {
    * Allocate a hash table to store the dictionary.
    */
   fprintf(stderr, "Creating hashtable\n");
-  dictionary = createHashTable(10, &stringHash, &stringEquals);
+  dictionary = createHashTable(2048, &stringHash, &stringEquals);
 
   fprintf(stderr, "Loading dictionary %s\n", argv[1]);
   readDictionary(argv[1]);
   fprintf(stderr, "Dictionary loaded\n");
-  printHash();
+  //printHash();  // The print function add for the test purpose.
 
   fprintf(stderr, "Processing stdin\n");
   processInput();
@@ -129,7 +129,6 @@ void readDictionary(char *dictName) {
             break;
         }
         insertData(dictionary, entry, entry);
-        fprintf(stderr, "%s\n", entry);
     }
     fclose(fp);
 }
@@ -165,17 +164,14 @@ void processInput() {
         }
         if (ch < 65 || (ch > 90 && ch < 97) || ch > 122) putchar(ch);
         else {
-            char *word, x;
+            char word[60], x;
             int i = 1;
-            word = (char *) malloc (sizeof(char) * 60);
             word[0] = ch;
             for (;;) {
                 x = getchar();
                 if (x < 65 || (x > 90 && x < 97) || x > 122) {
                     word[i] = '\0';
-                    char *word2, *word3;
-                    word2 = (char *) malloc (sizeof(char) * 60);
-                    word3 = (char *) malloc (sizeof(char) * 60);
+                    char word2[60], word3[60];
                     word2[0] = tolower(word[0]);
                     word3[0] = word[0];
                     for (int k = 1; k < i; k++) {
