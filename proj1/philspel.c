@@ -48,12 +48,12 @@ int main(int argc, char **argv) {
    * Allocate a hash table to store the dictionary.
    */
   fprintf(stderr, "Creating hashtable\n");
-  dictionary = createHashTable(2255, &stringHash, &stringEquals);
+  dictionary = createHashTable(10, &stringHash, &stringEquals);
 
   fprintf(stderr, "Loading dictionary %s\n", argv[1]);
   readDictionary(argv[1]);
   fprintf(stderr, "Dictionary loaded\n");
-  //printHash();
+  printHash();
 
   fprintf(stderr, "Processing stdin\n");
   processInput();
@@ -124,7 +124,7 @@ void readDictionary(char *dictName) {
         exit(1);
     }
     for(;;) {
-        char entry[60];
+        char *entry = (char *) malloc (sizeof(char) * 60);
         if (fscanf(fp, "%[^\n] ", entry) == EOF) {
             break;
         }
@@ -157,32 +157,39 @@ void readDictionary(char *dictName) {
  */
 void processInput() {
     int ch;
+    int temp = '\0';
     while ((ch=getchar()) != EOF) {
+        if (temp != '\0') {
+            putchar(temp);
+            temp = '\0';
+        }
         if (ch < 65 || (ch > 90 && ch < 97) || ch > 122) putchar(ch);
         else {
-            char word[60], x;
+            char *word, x;
             int i = 1;
+            word = (char *) malloc (sizeof(char) * 60);
             word[0] = ch;
             for (;;) {
                 x = getchar();
                 if (x < 65 || (x > 90 && x < 97) || x > 122) {
                     word[i] = '\0';
-                    char word2[60], word3[60];
-                    word2[0] = toupper(word[0]);
+                    char *word2, *word3;
+                    word2 = (char *) malloc (sizeof(char) * 60);
+                    word3 = (char *) malloc (sizeof(char) * 60);
+                    word2[0] = tolower(word[0]);
                     word3[0] = word[0];
                     for (int k = 1; k < i; k++) {
-                        word2[k] = toupper(word[k]);
-                        word3[k] = toupper(word[k]);
+                        word2[k] = tolower(word[k]);
+                        word3[k] = tolower(word[k]);
                     }
                     word2[i] = '\0';
                     word3[i] = '\0';
-                    if (!findData(dictionary, word) && !findData(dictionary, word2) 
-                            && !findData(dictionary, word3)) {
+                    if (!findData(dictionary, word) && !findData(dictionary, word2) && !findData(dictionary, word3)) {
                         printf("%s [sic]", word);
                     } else {
                         printf("%s", word);
                     }
-                    putchar(x);
+                    temp = (int) x;
                     break;
                 }
                 word[i] = x;
@@ -197,11 +204,10 @@ void printHash() {
     int size = dictionary->size;
     for (int i = 0; i < size; i++) {
         struct HashBucket *link = data[i];
-        if (link != NULL) {
-            fprintf(stderr, "%s->", (char *) (link->data));
+        while (link != NULL) {
+            fprintf(stderr, " %s ", (char *) (link->data));
             link = link->next;
         }
-        fprintf(stderr, "\n");
     }
 }
 
