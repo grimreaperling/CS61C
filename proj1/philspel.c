@@ -180,7 +180,8 @@ void processInput() {
                     }
                     word2[i] = '\0';
                     word3[i] = '\0';
-                    if (!findData(dictionary, word) && !findData(dictionary, word2) && !findData(dictionary, word3)) {
+                    if (!findData(dictionary, word) && !findData(dictionary, word2) 
+                            && !findData(dictionary, word3)) {
                         printf("%s [sic]", word);
                     } else {
                         printf("%s", word);

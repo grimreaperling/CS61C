@@ -21,4 +21,22 @@ main:
     ecall # Exit
 
 factorial:
-    # YOUR CODE HERE
+    bne a0, x0, next
+    addi a0, x0, 1
+    jr ra
+next:
+    add t0, x0, a0
+    addi a0, a0, -1
+    addi sp, sp, -8
+    sw ra, 0(sp)
+    sw t0, 4(sp)
+    jal ra, factorial
+    lw ra, 0(sp)
+    lw t0, 4(sp)
+    addi sp, sp, 8
+    mul a0, a0, t0
+    jr ra
+
+    
+
+    
