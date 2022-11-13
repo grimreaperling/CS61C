@@ -33,7 +33,7 @@ start:
 
 loop_start:
     lw t0, 0(s0)
-    blt t0, a1 loop_continue
+    blt t0, s2, loop_continue
     add s2, t0, x0
     add a0, s1, x0
 
