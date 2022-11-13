@@ -13,17 +13,16 @@
 # this function exits with error code 8.
 # ==============================================================================
 relu:
-    addi t0, x0, 1
-    bge s1, t0, start
-    addi a1, x0, 8
-    jal ra, exit2
-    
-start:
     addi sp, sp, -8
     sw s0, 0(sp)
     sw s1, 4(sp)
     add s0, a0, x0
     add s1, a1, x0 
+
+    addi t0, x0, 1
+    bge s1, t0, loop_start
+    addi a1, x0, 8
+    jal ra, exit2
 
 loop_start:
     lw t0, 0(a0)

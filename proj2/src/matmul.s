@@ -23,26 +23,7 @@
 #	None (void), sets d = matmul(m0, m1)
 # =======================================================
 matmul:
-    # Error checks
-    addi t0, x0, 1
-    bge a1, t0, next1
-    addi a1, x0, 2
-    jal exit2
-next1:
-    bge a2, t0, next2
-    addi a1, x0, 2
-    jal exit2
-next2:
-    bge a4, t0, next3
-    addi a1, x0, 3
-    jal exit2
-next3:
-    beq a2, a4, start
-    addi a1, x0, 4
-    jal exit2
-    
-start:
-    addi sp, sp, -32
+    addi sp, sp, -36
     sw s0, 0(sp)
     sw s1, 4(sp)
     sw s2, 8(sp)
@@ -51,6 +32,7 @@ start:
     sw s5, 20(sp)
     sw s6, 24(sp)
     sw s7, 28(sp)
+    sw s8, 32(sp)
     add s0, a0, x0
     add s1, a1, x0
     add s2, a2, x0
@@ -59,6 +41,25 @@ start:
     add s5, x0, x0
     add s6, x0, x0
     add s7, a3, x0
+    add s8, a6, x0
+
+    # Error checks
+    addi t0, x0, 1
+    bge s1, t0, next1
+    addi a1, x0, 2
+    jal exit2
+next1:
+    bge s3, t0, next2
+    addi a1, x0, 2
+    jal exit2
+next2:
+    bge s4, t0, next3
+    addi a1, x0, 3
+    jal exit2
+next3:
+    beq s2, s4, outer_loop_start
+    addi a1, x0, 4
+    jal exit2
 
 outer_loop_start:
     add a0, s0, x0
@@ -81,7 +82,7 @@ inner_loop_start:
 
     jal ra, dot
 
-    sw a0, 0(a6)
+    sw a0, 0(s8)
 
     lw a0, 0(sp)
     lw a1, 4(sp)
@@ -95,7 +96,7 @@ inner_loop_start:
 
     addi s6, s6, 1
     addi s3, s3, 4
-    addi a6, a6, 4
+    addi s8, s8, 4
     blt s6, a5, inner_loop_start
 
 inner_loop_end:
@@ -116,5 +117,6 @@ outer_loop_end:
     lw s5, 20(sp)
     lw s6, 24(sp)
     lw s7, 28(sp)
-    addi sp, sp, 32
+    lw s8, 32(sp)
+    addi sp, sp, 36
     ret
