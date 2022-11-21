@@ -273,6 +273,27 @@ end TCL_Generic;
     <a name="clabelfont" val="SansSerif bold 16"/>
     <a name="circuitnamedbox" val="true"/>
     <a name="circuitvhdlpath" val=""/>
+    <wire from="(440,120)" to="(530,120)"/>
+    <wire from="(590,170)" to="(590,210)"/>
+    <wire from="(340,210)" to="(590,210)"/>
+    <wire from="(680,130)" to="(730,130)"/>
+    <wire from="(170,90)" to="(230,90)"/>
+    <wire from="(170,150)" to="(230,150)"/>
+    <wire from="(570,130)" to="(620,130)"/>
+    <wire from="(730,130)" to="(750,130)"/>
+    <wire from="(590,170)" to="(620,170)"/>
+    <wire from="(320,110)" to="(320,120)"/>
+    <wire from="(170,210)" to="(340,210)"/>
+    <wire from="(230,90)" to="(230,110)"/>
+    <wire from="(230,130)" to="(230,150)"/>
+    <wire from="(340,160)" to="(340,210)"/>
+    <wire from="(230,130)" to="(300,130)"/>
+    <wire from="(230,110)" to="(300,110)"/>
+    <wire from="(730,130)" to="(730,180)"/>
+    <wire from="(490,140)" to="(490,170)"/>
+    <wire from="(340,160)" to="(380,160)"/>
+    <wire from="(340,120)" to="(380,120)"/>
+    <wire from="(490,140)" to="(530,140)"/>
     <comp lib="0" loc="(170,90)" name="Pin">
       <a name="width" val="8"/>
       <a name="label" val="in1"/>
@@ -284,12 +305,26 @@ end TCL_Generic;
     <comp lib="0" loc="(170,210)" name="Pin">
       <a name="label" val="CLK"/>
     </comp>
-    <comp lib="0" loc="(560,130)" name="Pin">
+    <comp lib="3" loc="(340,120)" name="Multiplier"/>
+    <comp lib="4" loc="(380,90)" name="Register"/>
+    <comp lib="0" loc="(750,130)" name="Pin">
       <a name="facing" val="west"/>
       <a name="output" val="true"/>
       <a name="width" val="8"/>
       <a name="label" val="out1"/>
       <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="3" loc="(570,130)" name="Adder"/>
+    <comp lib="4" loc="(620,100)" name="Register"/>
+    <comp lib="0" loc="(730,180)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="width" val="8"/>
+      <a name="label" val="Output1"/>
+    </comp>
+    <comp lib="0" loc="(490,170)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="width" val="8"/>
+      <a name="label" val="Output1"/>
     </comp>
   </circuit>
 </project>
